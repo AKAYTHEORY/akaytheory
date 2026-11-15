@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Lint, Type Check & Unit Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: akaytheory_user
+          POSTGRES_PASSWORD: akaytheory_password
+          POSTGRES_DB: akaytheory_dev
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm db:generate
+
+      - name: Run ESLint
+        run: pnpm lint
+
+      - name: Run Type Check
+        run: pnpm type-check
+
+      - name: Run Database Migrations
+        run: pnpm db:push
+        env:
+          DATABASE_URL: "postgresql://akaytheory_user:akaytheory_password@localhost:5432/akaytheory_dev"
+
+      - name: Seed Database
+        run: pnpm db:seed
+        env:
+          DATABASE_URL: "postgresql://akaytheory_user:akaytheory_password@localhost:5432/akaytheory_dev"
+
+      - name: Run Unit Tests
+        run: pnpm test
+
+      - name: Build Monorepo
+        run: pnpm build
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chrome
+
+      - name: Run Playwright E2E Tests
+        run: pnpm test:e2e
+        env:
+          DATABASE_URL: "postgresql://akaytheory_user:akaytheory_password@localhost:5432/akaytheory_dev"
+          JWT_SECRET: "ci_jwt_secret_token_at_least_32_characters_long"
+          COOKIE_SECRET: "ci_cookie_signing_secret_for_akaytheory_session"
+

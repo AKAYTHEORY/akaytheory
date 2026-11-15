@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Production Build Outputs
+dist/
+build/
+out/
+.vite/
+.turbo/
+.next/
+*.tsbuildinfo
+
+# Environment Variables & Live Credentials (BR-021 Security)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Test Results, Coverage & Playwright Browser Artifacts
+test-results/
+playwright-report/
+blob-report/
+coverage/
+.nyc_output/
+
+# Logs & Debug Telemetry
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Operating System & IDE Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# SQLite & Local Database Artifacts
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal

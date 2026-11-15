@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    /* Main canvas bg #0D1117 */
+    --background: 216 28% 7%;
+    /* Primary text #F3F4F6 */
+    --foreground: 220 14% 96%;
+    --text-primary: 220 14% 96%;
+    /* Secondary text #9CA3AF */
+    --text-secondary: 218 11% 65%;
+    /* Muted text #6B7280 */
+    --text-muted: 220 9% 46%;
+
+    /* Surface hierarchy */
+    /* Secondary bg #111827 */
+    --surface: 221 39% 11%;
+    /* Muted surface #0D1117 */
+    --surface-muted: 216 28% 9%;
+    /* Elevated surface #161D2A */
+    --surface-elevated: 219 31% 13%;
+    /* Hover surface #1F2937 */
+    --surface-hover: 217 33% 17%;
+
+    /* Borders */
+    /* Default dark border #21262D */
+    --border: 215 15% 15%;
+    --border-subtle: 215 15% 12%;
+    /* Subtle hover border #30363D */
+    --border-hover: 212 12% 21%;
+
+    /* Brand / Accent: Violet #8B5CF6 */
+    --primary: 258 90% 66%;
+    --primary-foreground: 220 14% 96%;
+    --primary-hover: 258 90% 72%;
+    --primary-muted: 258 90% 66%;
+    --accent: 258 90% 66%;
+    --accent-foreground: 220 14% 96%;
+    --accent-hover: 258 90% 72%;
+    --accent-subtle: 258 90% 66%;
+
+    /* Semantic status */
+    /* Success #22C55E */
+    --success: 142 71% 45%;
+    --success-foreground: 220 14% 96%;
+    --success-subtle: 142 71% 45%;
+
+    /* Warning #F59E0B */
+    --warning: 38 92% 50%;
+    --warning-foreground: 221 39% 11%;
+    --warning-subtle: 38 92% 50%;
+
+    /* Danger / Rose #F43F5E */
+    --danger: 350 89% 60%;
+    --danger-foreground: 220 14% 96%;
+    --danger-subtle: 350 89% 60%;
+
+    /* Info #38BDF8 */
+    --info: 198 93% 60%;
+    --info-foreground: 216 28% 7%;
+    --info-subtle: 198 93% 60%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --text-primary: 222 47% 11%;
+    --text-secondary: 215 16% 47%;
+    --text-muted: 215 16% 60%;
+    --surface: 210 40% 98%;
+    --surface-muted: 210 40% 95%;
+    --surface-elevated: 0 0% 100%;
+    --surface-hover: 210 40% 94%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 258 90% 58%;
+    --primary-muted: 258 90% 66%;
+    --accent: 258 90% 66%;
+    --accent-foreground: 210 40% 98%;
+    --accent-hover: 258 90% 58%;
+    --accent-subtle: 258 90% 66%;
+    --border: 214 32% 91%;
+    --border-subtle: 214 32% 93%;
+    --border-hover: 214 32% 85%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --success-subtle: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    --warning-subtle: 38 92% 50%;
+    --danger: 350 89% 60%;
+    --danger-foreground: 0 0% 100%;
+    --danger-subtle: 350 89% 60%;
+    --info: 198 93% 60%;
+    --info-foreground: 0 0% 0%;
+    --info-subtle: 198 93% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background-color: #0B0D13;
+    color: #F3F4F6;
+  }
+
+  /* macOS Pro Glass & Window Utilities */
+  .mac-window {
+    @apply rounded-2xl border border-white/[0.08] bg-surface/90 backdrop-blur-2xl shadow-2xl;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .mac-glass {
+    @apply backdrop-blur-xl bg-surface/75 border border-white/[0.07];
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .mac-segmented {
+    @apply bg-surface-elevated/80 p-1 rounded-xl border border-white/[0.06];
+    box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  /* Sleek macOS custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262B36;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3B4252;
+  }
+}
